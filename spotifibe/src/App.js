@@ -1,5 +1,6 @@
 import "./index.css";
-import "./login.css";
+import "./Styles/login.css";
+import "./Styles/Navbar.css";
 import Navbar from "./Components/Navbar";
 
 function App() {
