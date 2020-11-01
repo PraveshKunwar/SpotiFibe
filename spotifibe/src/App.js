@@ -1,12 +1,11 @@
 import "./index.css";
-import "./Styles/login.css";
-import "./Styles/Navbar.css";
-import Navbar from "./Components/Navbar";
+import "./Navbar.css";
+import MainNav from "./Components/MainNav";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <MainNav />
     </div>
   );
 }
