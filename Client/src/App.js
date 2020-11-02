@@ -1,5 +1,3 @@
-import "./index.css";
-import "./Navbar.css";
 import MainNav from "./Components/MainNav";
 
 function App() {
