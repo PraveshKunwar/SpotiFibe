@@ -7,110 +7,103 @@
   src: url("../Styles/Sequel\ Sans\ Black\ Disp.otf");
 }
 
+#root {
+  background: rgba(103, 138, 100, 0.2);
+}
+
+html {
+  background: rgba(103, 138, 100, 0.2);
+}
+
 h2 {
   font-family: "Sequel Sans", "Roboto Mono", "Worksans", "Source Sans Pro",
     "Odibee Sans", "Raleway", "Courier New", Courier, monospace;
   font-size: 50px;
   word-spacing: 0.1px;
   margin-left: 10%;
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
-.conversion {
-  margin-left: 10%;
-  border-radius: 10px;
-  font-size: 20px;
-  width: 200px;
-  border-color: white;
-  transition: transform 0.2s;
-  font-weight: 600;
-}
-
-.conversion:hover {
-  cursor: pointer;
-  opacity: 0.9;
-  transform: translateY(-4px);
-  box-shadow: 5px 5px rgba(255, 255, 255, 0.61);
-}
-.conversion:visited {
-  border-color: white;
-}
-
-.conversion:focus {
-  outline: none;
-}
-
-.conversion {
-  background: rgb(20, 130, 180);
-}
-
-.conversion a {
-  color: white;
-  text-decoration: none;
-  font-family: "Raleway";
-}
-
-.conversion a:visited {
-  color: white;
-}
-
-.about-btn {
-  background: #00b300;
-}
-.about-btn a {
-  color: white;
-  text-decoration: none;
-  font-family: "Raleway";
-}
-
-.about-btn a:visited {
-  color: white;
-}
-
-.about-btn {
-  margin-left: 10%;
-  border-radius: 10px;
-  font-size: 20px;
-  width: 200px;
-  border-color: white;
-  transition: transform 0.2s;
-  font-weight: 600;
-}
-
-.about-btn:hover {
-  cursor: pointer;
-  opacity: 0.9;
-  transform: translateY(-4px);
-  box-shadow: 5px 5px rgba(255, 255, 255, 0.61);
-}
-.about-btn:visited {
-  border-color: white;
-}
-
-.about-btn:focus {
-  outline: none;
-}
-
-.spotifibe-cover {
-  border-radius: 10px;
-  margin-left: 70%;
-  margin-top: -10%;
-  width: 400px;
-}
-
-.container {
+.grid-container {
   display: grid;
-  grid-template-columns: 0.5fr 0.5fr 0.5fr;
-  grid-row: auto;
-  grid-gap: 15px;
+  grid-template-columns: 1.5fr 0.5fr;
+  grid-template-rows: 0.3fr 0.5fr 0.4fr;
+  gap: 10px 20px;
+  grid-template-areas:
+    "one ."
+    "two ."
+    "three .";
+  float: right;
+}
+.one {
+  grid-area: one;
+}
+.two {
+  grid-area: two;
+}
+.three {
+  grid-area: three;
 }
 
-.container > div {
-  background: #f3f3f3;
+.grid-container > div {
+  margin-top: 0.5rem;
   width: 300px;
-  height: 300px;
-  color: black;
+  height: 200px;
+  background: rgb(152, 173, 150);
   border-radius: 10px;
-  margin-top: -20%;
+  transition: transform 0.2s;
+  box-shadow: 0 6px 6px rgba(103, 138, 100, 0.2);
   text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "Roboto Mono", "Worksans", "Source Sans Pro", "Odibee Sans",
+    "Raleway", "Courier New", Courier, monospace;
+}
+
+.grid-container > div:hover {
+  transform: scale(1.02);
+}
+
+.btn {
+  display: block;
+  font-size: 20px;
+  font-weight: 750;
+  margin-top: 1rem;
+  margin-left: 10%;
+  box-shadow: 0 6px 6px rgba(103, 138, 100, 0.2);
+  color: white;
+}
+
+.btn-2 {
+  font-size: 20px;
+  font-weight: 750;
+  margin-top: 1rem;
+  margin-left: 10%;
+  box-shadow: 0 6px 6px rgba(103, 138, 100, 0.2);
+  color: black;
+}
+
+.btn a,
+.btn-2 a {
+  text-decoration: none;
+}
+
+.btn a:visited,
+.btn-2 a:visited {
+  color: black;
+}
+
+/*Media for buttons*/
+@media screen and (max-width: 720px) {
+  .btn,
+  .btn-2 {
+    margin-left: 25%;
+  }
+  .grid-container {
+    margin-left: 25%;
+  }
+}
+
+.arrow {
+  width: 300px;
 }
