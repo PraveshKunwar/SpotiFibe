@@ -1,0 +1,83 @@
+html {
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: "Worksans";
+  src: url("../Styles/WorkSans-Black.ttf");
+}
+@font-face {
+  font-family: "Sequel Sans";
+  src: url("../Styles/Sequel\ Sans\ Black\ Disp.otf");
+}
+
+h1,
+h2 {
+  font-family: "Sequel Sans", "Roboto Mono", "Worksans", "Source Sans Pro",
+    "Odibee Sans", "Raleway", "Courier New", Courier, monospace;
+  font-size: 50px;
+  word-spacing: 0.1px;
+  margin-left: 10%;
+  margin-top: 1rem;
+  color: white;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+.landing {
+  margin-top: 0;
+  height: 95vh;
+  opacity: 1;
+  background: linear-gradient(270deg, #09203f, #537895);
+  background-size: 400% 400%;
+
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 39%;
+  }
+  50% {
+    background-position: 100% 62%;
+  }
+  100% {
+    background-position: 0% 39%;
+  }
+}
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 0% 39%;
+  }
+  50% {
+    background-position: 100% 62%;
+  }
+  100% {
+    background-position: 0% 39%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 39%;
+  }
+  50% {
+    background-position: 100% 62%;
+  }
+  100% {
+    background-position: 0% 39%;
+  }
+}
+
+.section-two {
+  background: white;
+  height: 100vh;
+  margin-top: -1rem;
+}
+
+.dropdown-icon {
+  size: 32;
+}

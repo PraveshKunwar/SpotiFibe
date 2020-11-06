@@ -19,8 +19,8 @@ import {
   Brand,
   Button,
 } from "react-bootstrap";
-import NavBrand from "../Styles/Navbars/NavBrand";
-import NavList from "../Styles/Navbars/NavList";
+import NavBrand from "../Styles/NavBrand";
+import NavList from "../Styles/NavList";
 
 class MainNav extends React.Component {
   render() {

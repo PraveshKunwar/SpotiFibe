@@ -1,7 +1,5 @@
-import { withRouter } from "react-router-dom";
-
 const NavList = {
-  fontWeight: 600,
+  fontWweight: 800,
   fontFamily: "Raleway, Courier New",
   color: "white",
 };
