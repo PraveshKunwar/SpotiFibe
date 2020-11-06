@@ -11,54 +11,32 @@ html {
   src: url("../Styles/Sequel\ Sans\ Black\ Disp.otf");
 }
 
-h1,
-h2 {
+#header-1 {
   font-family: "Sequel Sans", "Roboto Mono", "Worksans", "Source Sans Pro",
     "Odibee Sans", "Raleway", "Courier New", Courier, monospace;
-  font-size: 50px;
+  font-size: 70px;
   word-spacing: 0.1px;
-  margin-left: 10%;
-  margin-top: 1rem;
+  margin-top: -1rem;
+  padding-top: 30px;
   color: white;
+  text-align: center;
 }
 
-h2 {
+#header-2 {
+  font-family: "Sequel Sans", "Roboto Mono", "Worksans", "Source Sans Pro",
+    "Odibee Sans", "Raleway", "Courier New", Courier, monospace;
   font-size: 30px;
+  word-spacing: 0.1px;
+  padding-top: 30px;
+  color: white;
+  margin-top: -2rem;
+  text-align: center;
 }
-
 .landing {
   margin-top: 0;
-  height: 95vh;
+  height: 100vh;
   opacity: 1;
-  background: linear-gradient(270deg, #09203f, #537895);
-  background-size: 400% 400%;
-
-  -webkit-animation: AnimationName 30s ease infinite;
-  -moz-animation: AnimationName 30s ease infinite;
-  animation: AnimationName 30s ease infinite;
-}
-
-@-webkit-keyframes AnimationName {
-  0% {
-    background-position: 0% 39%;
-  }
-  50% {
-    background-position: 100% 62%;
-  }
-  100% {
-    background-position: 0% 39%;
-  }
-}
-@-moz-keyframes AnimationName {
-  0% {
-    background-position: 0% 39%;
-  }
-  50% {
-    background-position: 100% 62%;
-  }
-  100% {
-    background-position: 0% 39%;
-  }
+  background-image: url("../Images/banner.jpg");
 }
 @keyframes AnimationName {
   0% {
@@ -75,9 +53,66 @@ h2 {
 .section-two {
   background: white;
   height: 100vh;
-  margin-top: -1rem;
 }
 
-.dropdown-icon {
-  size: 32;
+.learnMore-btn {
+  border-radius: 20px;
+  margin-left: 45%;
+  margin-top: 10vh;
+  background: black;
+  transition: transform 0.3s;
+  box-shadow: 0 6px 6px rgba(103, 138, 100, 0.2);
+}
+
+.learnMore-btn a {
+  width: max-content;
+  font-size: 32px;
+  font-family: "Raleway", "Sequel Sans", "Worksans";
+  color: white;
+}
+
+.learnMore-btn a:visited {
+  color: white;
+}
+
+.learnMore-btn:focus {
+  outline: none;
+}
+
+.learnMore-btn:hover {
+  cursor: pointer;
+  transform: translateY(-7px) scale(1.1);
+}
+
+.learnMore-btn a:hover {
+  color: white;
+}
+
+@media screen and (max-width: 800px) {
+  .learnMore-btn {
+    margin-left: 35%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .learnMore-btn {
+    margin-left: 25%;
+    margin-top: 72vh;
+  }
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flex-container > div {
+  margin-left: 40%;
+  background: white;
+  color: black;
+  border-radius: 10px;
+  width: 300px;
+  height: 300px;
 }
