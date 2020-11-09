@@ -1,24 +1,8 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  NavLink,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./Home";
-import Convert from "./Convert";
 import About from "./About";
-import {
-  Navbar,
-  Nav,
-  NavItem,
-  NavDropdown,
-  MenuItem,
-  Collapse,
-  Brand,
-  Button,
-} from "react-bootstrap";
+import { Navbar, Nav, NavItem } from "react-bootstrap";
 import NavBrand from "../Styles/NavBrand";
 import NavList from "../Styles/NavList";
 
@@ -39,12 +23,7 @@ class MainNav extends React.Component {
               <Nav className="mr-auto">
                 <NavItem className="nav-item">
                   <Link to="/" exact className="nav-link" style={NavList}>
-                    Home
-                  </Link>
-                </NavItem>
-                <NavItem className="nav-item">
-                  <Link to="/convert" className="nav-link" style={NavList}>
-                    Convert
+                    Home/Convert
                   </Link>
                 </NavItem>
                 <NavItem className="nav-item">
@@ -58,8 +37,7 @@ class MainNav extends React.Component {
 
           <Switch>
             <Route exact path="/" component={Home} />
-
-            <Route path="/convert" component={Convert} />
+            <Route path="/home" component={Home} />
             <Route path="/about" component={About} />
           </Switch>
         </div>

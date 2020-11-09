@@ -2,8 +2,8 @@ html {
   scroll-behavior: smooth;
 }
 
-#root {
-  margin: 0;
+.App {
+  background: black !important;
 }
 
 @font-face {
@@ -13,6 +13,11 @@ html {
 @font-face {
   font-family: "Sequel Sans";
   src: url("../Styles/Sequel\ Sans\ Black\ Disp.otf");
+}
+
+@font-face {
+  font-family: "Gotham Medium";
+  src: url("../Styles/Gotham-Medium.otf") format("opentype");
 }
 
 .btn {
@@ -49,5 +54,47 @@ html {
   .btn,
   .btn-2 {
     margin-left: 25%;
+  }
+}
+
+h1,
+h2 {
+  font-family: "Sequel Sans", "Gotham Medium";
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 2rem;
+  font-size: 80px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+.Img-Grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.Img-Grid > div {
+  margin: 30px;
+}
+
+.Img-Grid > div > img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.Img-Grid > div > img:hover {
+  transform: translateY(-5px);
+}
+
+@media screen and (max-width: 400px) {
+  .Img-Grid > div > img {
+    width: 100%;
   }
 }

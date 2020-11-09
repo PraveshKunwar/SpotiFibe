@@ -1,0 +1,68 @@
+@font-face {
+  font-family: "Gotham Medium";
+  src: url("../Styles/Gotham-Medium.otf") format("opentype");
+}
+
+.spotify-btn {
+  font-family: "Gotham Medium";
+  color: white;
+  text-decoration: none;
+  display: flex;
+  margin-left: 45%;
+}
+
+@media screen and (max-width: 1100px) {
+  .spotify-btn {
+    margin-left: 40%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .spotify-btn {
+    margin-left: 35%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .spotify-btn {
+    margin-left: 30%;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .spotify-btn {
+    margin-left: 20%;
+  }
+}
+
+.youtube-btn {
+  font-family: "Gotham Medium";
+  color: white;
+  text-decoration: none;
+  display: flex;
+  margin-left: 44.5%;
+}
+
+@media screen and (max-width: 1100px) {
+  .youtube-btn {
+    margin-left: 40%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .youtube-btn {
+    margin-left: 35%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .youtube-btn {
+    margin-left: 30%;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .youtube-btn {
+    margin-left: 20%;
+  }
+}
