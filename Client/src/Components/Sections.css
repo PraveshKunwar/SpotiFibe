@@ -50,69 +50,16 @@ html {
   }
 }
 
-.section-two {
-  background: white;
-  height: 100vh;
-}
-
-.learnMore-btn {
-  border-radius: 20px;
-  margin-left: 45%;
-  margin-top: 10vh;
-  background: black;
-  transition: transform 0.3s;
-  box-shadow: 0 6px 6px rgba(103, 138, 100, 0.2);
-}
-
-.learnMore-btn a {
-  width: max-content;
-  font-size: 32px;
-  font-family: "Raleway", "Sequel Sans", "Worksans";
-  color: white;
-}
-
-.learnMore-btn a:visited {
-  color: white;
-}
-
-.learnMore-btn:focus {
-  outline: none;
-}
-
-.learnMore-btn:hover {
-  cursor: pointer;
-  transform: translateY(-7px) scale(1.1);
-}
-
-.learnMore-btn a:hover {
-  color: white;
-}
-
-@media screen and (max-width: 800px) {
-  .learnMore-btn {
-    margin-left: 35%;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .learnMore-btn {
-    margin-left: 25%;
-    margin-top: 72vh;
-  }
-}
-
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.flex-container > div {
-  margin-left: 40%;
-  background: white;
-  color: black;
+.start-btn {
+  background: #125fdb;
   border-radius: 10px;
-  width: 300px;
-  height: 300px;
+}
+
+.start-btn a {
+  color: white;
+}
+
+.start-btn a:hover,
+.start-btn a:visited {
+  color: white;
 }

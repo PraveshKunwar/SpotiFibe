@@ -1,7 +1,6 @@
 import landing from "../Sections.css";
 import { Animated } from "react-animated-css";
-import LearnMore from "./LearnMore";
-import LandingGrid from "./LandingGrid";
+import Button from "../Home_Btns";
 
 function SectionOne() {
   return (
@@ -14,8 +13,8 @@ function SectionOne() {
       </Animated>
       <Animated animationIn="fadeIn" animationInDelay="2000" isVisible={true}>
         <LandingGrid />
+        <Button />
       </Animated>
-      <LearnMore />
     </section>
   );
 }

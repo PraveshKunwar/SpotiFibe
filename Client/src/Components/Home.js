@@ -14,7 +14,6 @@ import { BsArrowLeft } from "react-icons/bs";
 //import Cards from "./Cards";
 import Home_Btns from "./Home_Btns";
 import SectionOne from "./SubComponents/SectionOne";
-import SectionTwo from "./SubComponents/SectionTwo";
 
 class Home extends Component {
   render() {
@@ -22,7 +21,6 @@ class Home extends Component {
       <div className="home" style={style}>
         <div class="main" style={style}>
           <SectionOne />
-          <SectionTwo />
         </div>
       </div>
     );
