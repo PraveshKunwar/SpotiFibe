@@ -2,7 +2,7 @@ import React from "react";
 import LoginBtns from "./LoginBtns";
 
 function Successful() {
-  return <div></div>;
+  return <div>askdjalsdjaklsjdkaljdkljadjakjdkdsj</div>;
 }
 
 export default Successful;

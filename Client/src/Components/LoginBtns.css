@@ -9,6 +9,8 @@
   text-decoration: none;
   display: flex;
   margin-left: 45%;
+  border-radius: 99px;
+  padding: 20px;
 }
 
 @media screen and (max-width: 1100px) {

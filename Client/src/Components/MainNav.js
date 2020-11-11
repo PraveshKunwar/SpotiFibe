@@ -22,7 +22,7 @@ class MainNav extends React.Component {
             <Navbar.Collapse>
               <Nav className="mr-auto">
                 <NavItem className="nav-item">
-                  <Link to="/" exact className="nav-link" style={NavList}>
+                  <Link to="/home" exact className="nav-link" style={NavList}>
                     Home/Convert
                   </Link>
                 </NavItem>

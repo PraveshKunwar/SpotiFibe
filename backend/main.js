@@ -1,14 +1,15 @@
+require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const cors = require("cors");
 let querystring = require("querystring");
 const request = require("request");
 const { post } = require("request");
 const redirect_uri =
   process.env.redirect_uri || `http://localhost:${PORT}/callback`;
-require("dotenv").config();
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -16,18 +17,6 @@ const scopes =
   "ugc-image-upload user-read-recently-played user-top-read user-read-playback-position user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-currently-playing streaming playlist-modify-publicplaylist-modify-private playlist-read-private playlist-read-collaborative user-follow-modify user-follow-read user-library-modify user-library-read user-read-email user-read-private";
 
 app.use(cors());
-
-app.get("/auth/spotify", (req, res) => {
-  res.redirect(
-    "https://accounts.spotify.com/authorize?" +
-      querystring.stringify({
-        response_type: "code",
-        client_id: process.env.CLIENT_ID,
-        scope: "user-read-private user-read-email",
-        redirect_uri,
-      })
-  );
-});
 
 app.get("/callback", (req, res) => {
   let returnedCode = req.query.code;
@@ -48,8 +37,8 @@ app.get("/callback", (req, res) => {
   request.post(options, (err, response, body) => {
     const accessToken = body.access_token;
     let uri = "http://localhost:3000";
-    res.json(accessToken);
-    res.redirect(`${uri}?access_token=${accessToken}`);
+
+    res.redirect(`${uri}`);
   });
 });
 app.listen(PORT, console.log(`Listening to ${PORT}`));
