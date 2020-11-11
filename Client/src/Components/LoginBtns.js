@@ -1,6 +1,7 @@
 import style from "./LoginBtns.css";
 import React from "react";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 class LoginBtns extends React.Component {
   constructor(props) {
@@ -11,7 +12,9 @@ class LoginBtns extends React.Component {
       { tokenSpotify: " " },
     ];
   }
-  componentDidMount() {}
+  componentDidMount() {
+    axios.get("/callback").then((res) => console.log(res));
+  }
   render() {
     return (
       <div>
