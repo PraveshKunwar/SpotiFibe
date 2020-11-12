@@ -1,0 +1,24 @@
+.fetched-header h1 {
+  font-family: "Sequel Sans", "Gotham Medium";
+  color: white;
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 60px;
+}
+
+.profile-image {
+  display: block;
+  margin: 0.5rem auto 0 auto;
+  border-radius: 50%;
+  width: 128px;
+  height: 128px;
+}
+
+hr {
+  height: 12px;
+  width: 60%;
+  margin-left: 20%;
+  border-radius: 10px;
+  border: 0;
+  box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}

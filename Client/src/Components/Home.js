@@ -3,7 +3,7 @@ import style from "./Home.css";
 import { Animated } from "react-animated-css";
 import { SpotifyToken } from "./Spotify";
 
-import Conversion from "./Successful";
+import Conversion from "./Conversion";
 import Login from "./LoginPage";
 import LandingHeader from "./LandingHeader";
 import ImgGrid from "./ImgGrid";
@@ -22,10 +22,9 @@ function Home() {
   }, []);
 
   return token !== " " ? (
-    <Conversion />
+    <Conversion token={token} />
   ) : (
     <div className="home">
-      <img className="banner" src={Banner}></img>
       <Animated isVisible={true} animationInDelay="1000" animationIn="fadeIn">
         <LandingHeader />
       </Animated>
