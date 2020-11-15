@@ -4,16 +4,13 @@ import { Animated } from "react-animated-css";
 import style from "./Conversion.css";
 import fetch from "node-fetch";
 import Playlists from "./Spotify-Components/Playlists";
+import ProfileHolder from "../Images/spotifylogo.png";
 
 const Successful = (props) => {
-  const [name, setName] = useState("Welcome User.");
-  const [profileImage, setProfileImage] = useState("");
+  const [name, setName] = useState("User");
+  const [profileImage, setProfileImage] = useState(ProfileHolder);
   const [profileUrl, setProfileUrl] = useState("");
-  const [playlistName, setPlaylistName] = useState("");
-  const [playlistId, setPlaylistId] = useState("");
-  const [playlistImage, setPlaylistImage] = useState("");
-  const [playlistDescription, setPlaylistDescription] = useState("");
-  const [playlistUrl, setPlaylistUrl] = useState("");
+  const [playlistItems, setPlaylistItems] = useState([]);
   useEffect(() => {
     fetch("https://api.spotify.com/v1/me", {
       headers: {
@@ -34,18 +31,11 @@ const Successful = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        data.items.map((item) => {
-          setPlaylistName(item.name);
-          setPlaylistId(item.id);
-          item.images.map((img) => setPlaylistImage(img.url));
-          item.description !== ""
-            ? setPlaylistDescription(item.description)
-            : setPlaylistDescription("No Description.");
-          setPlaylistUrl(item.external_urls.spotify);
-        });
+        setPlaylistItems(data);
       })
       .catch((err) => console.error(err));
   }, []);
+
   return (
     <div className="successful" style={style}>
       <Animated isVisible={true} animationInDelay="1000" animationIn="fadeIn">
@@ -62,9 +52,7 @@ const Successful = (props) => {
         <hr></hr>
       </Animated>
       <Animated isVisible={true} animationInDelay="3000" animationIn="fadeIn">
-        <div className="playlists">
-          <Playlists token={props.token} />
-        </div>
+        <div className="playlists"></div>
       </Animated>
     </div>
   );
