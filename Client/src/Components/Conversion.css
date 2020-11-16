@@ -22,3 +22,41 @@ hr {
   border: 0;
   box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
 }
+
+.playlists {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.playlists > div {
+  width: 300px;
+  height: 300px;
+  margin: 30px;
+}
+
+.playlists > div > img {
+  border-radius: 20px;
+  height: 300px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.playlists > div > img:hover {
+  cursor: pointer;
+  transform: scale(1.02) translateY(-5px);
+}
+
+h2 {
+  font-family: "Sequel Sans", "Gotham Medium";
+  color: white;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 45px;
+}
+
+.playlists-text {
+  font-family: "Sequel Sans", "Gotham Medium";
+  color: white;
+  text-align: center;
+}
