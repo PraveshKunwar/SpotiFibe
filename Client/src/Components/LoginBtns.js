@@ -7,7 +7,7 @@ class LoginBtns extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        <div className="spotify-login">
           <Button variant="success" style={style} className="spotify-btn">
             <a href={accessUrl} style={{ color: "#f1ffff", fontWeight: "600" }}>
               Log in with Spotify

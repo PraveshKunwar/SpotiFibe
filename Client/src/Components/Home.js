@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import style from "./Home.css";
 import { Animated } from "react-animated-css";
 import { SpotifyToken } from "./Spotify";
-
 import Conversion from "./Conversion";
 import Login from "./LoginPage";
 import LandingHeader from "./LandingHeader";
 import ImgGrid from "./ImgGrid";
-import Banner from "../Images/spotifibe-cover.jpg";
 
 function Home() {
   const [token, setToken] = useState(" ");

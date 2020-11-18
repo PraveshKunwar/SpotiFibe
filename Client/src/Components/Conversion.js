@@ -3,7 +3,8 @@ import { Animated } from "react-animated-css";
 import style from "./Conversion.css";
 import fetch from "node-fetch";
 import ProfileHolder from "../Images/spotifylogo.png";
-
+import Dropdown from "react-bootstrap/Dropdown";
+import { Button } from "react-bootstrap";
 class Successful extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,10 @@ class Successful extends React.Component {
       profileImage: <ProfileHolder />,
       token: this.props.token,
       items: [],
+      clicked: false,
+      value: "Select Playlist",
     };
+    this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
     document.title = "Convert | SpotiFibe";
@@ -41,13 +45,15 @@ class Successful extends React.Component {
         this.setState({
           items: data.items,
         });
-        this.state.items.map((x) => {
-          console.log(x.name); // returns all the names of the playlists
-        });
       })
 
       .catch((err) => console.error(err));
   }
+
+  handleChange(event) {
+    this.setState({ value: event.target.name });
+  }
+
   render() {
     return (
       <div className="successful" style={style}>
@@ -58,10 +64,11 @@ class Successful extends React.Component {
         </Animated>
         <Animated isVisible={true} animationInDelay="2000" animationIn="fadeIn">
           <div className="profile">
-            <a href={this.state.profileUrl} target="_blank">
+            <a href={this.state.profileUrl} target="_blank" rel="noreferrer">
               <img
                 className="profile-image"
                 src={this.state.profileImage}
+                alt="profile"
               ></img>
             </a>
           </div>
@@ -73,11 +80,62 @@ class Successful extends React.Component {
             {this.state.items.map((item) => {
               return (
                 <div>
-                  <img src={item.images[0].url}></img>
+                  <img src={item.images[0].url} alt={item.name}></img>
                   <p className="playlists-text">{item.name}</p>
                 </div>
               );
             })}
+          </div>
+        </Animated>
+        <Animated isVisible={true} animationInDelay="3000" animationIn="fadeIn">
+          <div className="playlists-check">
+            <Dropdown
+              style={style}
+              className="dropdown"
+              id="dropdown-button-drop-down"
+              title="Dropdown button"
+            >
+              <Dropdown.Toggle
+                variant="success"
+                id="dropdown-basic"
+                className="dropdown-toggle"
+              >
+                {this.state.value}
+              </Dropdown.Toggle>
+              <Dropdown.Menu className="dropdown-menu">
+                {this.state.items.map((item) => {
+                  return (
+                    <Dropdown.Item
+                      name={item.name}
+                      eventKey={item.id}
+                      className="dropdown-item"
+                      onClick={this.handleChange}
+                    >
+                      {item.name}
+                    </Dropdown.Item>
+                  );
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
+            {this.state.value === "Select Playlist" ? (
+              false
+            ) : (
+              <div class="youtube-btn">
+                <Button
+                  classname="youtube"
+                  style={{
+                    color: "white",
+                    padding: "20px",
+                    borderRadius: "99px",
+                    background: "#FF0000",
+                  }}
+                >
+                  <a href="https://www.google.com/" style={{ color: "white" }}>
+                    Start Converting!
+                  </a>
+                </Button>
+              </div>
+            )}
           </div>
         </Animated>
       </div>

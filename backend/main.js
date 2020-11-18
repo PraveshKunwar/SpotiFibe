@@ -35,9 +35,7 @@ app.get("/callback", (req, res) => {
     json: true,
   };
   request.post(options, (err, response, body) => {
-    const accessToken = body.access_token;
     let uri = "http://localhost:3000";
-
     res.redirect(`${uri}`);
   });
 });
