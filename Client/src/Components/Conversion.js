@@ -4,7 +4,8 @@ import style from "./Conversion.css";
 import fetch from "node-fetch";
 import ProfileHolder from "../Images/spotifylogo.png";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Button } from "react-bootstrap";
+import Tracks from "./Tracks";
+
 class Successful extends React.Component {
   constructor(props) {
     super(props);
@@ -57,87 +58,100 @@ class Successful extends React.Component {
   render() {
     return (
       <div className="successful" style={style}>
-        <Animated isVisible={true} animationInDelay="1000" animationIn="fadeIn">
-          <div className="fetched-header">
-            <h1>Welcome {this.state.name}.</h1>
-          </div>
-        </Animated>
-        <Animated isVisible={true} animationInDelay="2000" animationIn="fadeIn">
-          <div className="profile">
-            <a href={this.state.profileUrl} target="_blank" rel="noreferrer">
-              <img
-                className="profile-image"
-                src={this.state.profileImage}
-                alt="profile"
-              ></img>
-            </a>
-          </div>
-          <hr></hr>
-        </Animated>
-        <Animated isVisible={true} animationInDelay="3000" animationIn="fadeIn">
-          <h2>Playlists</h2>
-          <div className="playlists">
-            {this.state.items.map((item) => {
-              return (
-                <div>
-                  <img src={item.images[0].url} alt={item.name}></img>
-                  <p className="playlists-text">{item.name}</p>
-                </div>
-              );
-            })}
-          </div>
-        </Animated>
-        <Animated isVisible={true} animationInDelay="3000" animationIn="fadeIn">
-          <div className="playlists-check">
-            <Dropdown
-              style={style}
-              className="dropdown"
-              id="dropdown-button-drop-down"
-              title="Dropdown button"
+        {this.state.value === "Select Playlist" ? (
+          <div>
+            <Animated
+              isVisible={true}
+              animationInDelay="1000"
+              animationIn="fadeIn"
             >
-              <Dropdown.Toggle
-                variant="success"
-                id="dropdown-basic"
-                className="dropdown-toggle"
-              >
-                {this.state.value}
-              </Dropdown.Toggle>
-              <Dropdown.Menu className="dropdown-menu">
+              <div className="fetched-header">
+                <h1>Welcome {this.state.name}.</h1>
+              </div>
+            </Animated>
+            <Animated
+              isVisible={true}
+              animationInDelay="2000"
+              animationIn="fadeIn"
+            >
+              <div className="profile">
+                <a
+                  href={this.state.profileUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    className="profile-image"
+                    src={this.state.profileImage}
+                    alt="profile"
+                  ></img>
+                </a>
+              </div>
+              <hr></hr>
+            </Animated>
+            <Animated
+              isVisible={true}
+              animationInDelay="3000"
+              animationIn="fadeIn"
+            >
+              <h2>Playlists</h2>
+              <div className="playlists">
                 {this.state.items.map((item) => {
                   return (
-                    <Dropdown.Item
-                      name={item.name}
-                      eventKey={item.id}
-                      className="dropdown-item"
-                      onClick={this.handleChange}
-                    >
-                      {item.name}
-                    </Dropdown.Item>
+                    <div>
+                      <img src={item.images[0].url} alt={item.name}></img>
+                      <p className="playlists-text">{item.name}</p>
+                    </div>
                   );
                 })}
-              </Dropdown.Menu>
-            </Dropdown>
-            {this.state.value === "Select Playlist" ? (
-              false
-            ) : (
-              <div class="youtube-btn">
-                <Button
-                  classname="youtube"
-                  style={{
-                    color: "white",
-                    padding: "20px",
-                    borderRadius: "99px",
-                    background: "#FF0000",
-                  }}
-                >
-                  <a href="https://www.google.com/" style={{ color: "white" }}>
-                    Start Converting!
-                  </a>
-                </Button>
               </div>
-            )}
+            </Animated>
+            <Animated
+              isVisible={true}
+              animationInDelay="3000"
+              animationIn="fadeIn"
+            >
+              <div className="playlists-check">
+                <Dropdown
+                  style={style}
+                  className="dropdown"
+                  id="dropdown-button-drop-down"
+                  title="Dropdown button"
+                >
+                  <Dropdown.Toggle
+                    variant="success"
+                    id="dropdown-basic"
+                    className="dropdown-toggle"
+                  >
+                    {this.state.value}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu className="dropdown-menu">
+                    {this.state.items.map((item) => {
+                      return (
+                        <Dropdown.Item
+                          name={item.name}
+                          eventKey={item.id}
+                          className="dropdown-item"
+                          onClick={this.handleChange}
+                        >
+                          {item.name}
+                        </Dropdown.Item>
+                      );
+                    })}
+                  </Dropdown.Menu>
+                </Dropdown>
+                <br></br>
+                <br></br>
+              </div>
+            </Animated>
           </div>
-        </Animated>
+        ) : (
+          <Tracks
+            value={this.state.value}
+            items={this.state.items}
+            token={this.state.token}
+          />
+        )}
       </div>
     );
   }

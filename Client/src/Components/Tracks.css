@@ -1,0 +1,26 @@
+.tracks-images {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.tracks-images > div {
+  margin: 15px;
+}
+
+.tracks-images > div > img {
+  width: 200px;
+  height: 200px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.tracks-images > div > img:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.caption-paragraph {
+  color: white;
+  font-family: "Sequel Sans", "Gotham Medium";
+}

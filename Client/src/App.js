@@ -1,11 +1,11 @@
-import MainNav from "./Components/MainNav";
+import Navigation from "./Components/Navigation";
 import "./Components/Home.css";
 import "./index.css";
 
 function App() {
   return (
     <div className="App">
-      <MainNav />
+      <Navigation />
     </div>
   );
 }

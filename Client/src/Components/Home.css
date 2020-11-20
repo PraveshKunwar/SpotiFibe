@@ -25,36 +25,21 @@ html {
   font-size: 20px;
   font-weight: 750;
   margin-top: 1rem;
-  margin-left: 10%;
-  box-shadow: 0 6px 6px rgba(103, 138, 100, 0.2);
+  box-shadow: 0 6px 6px #106112;
   color: white;
+  transition: transform 0.3s ease-in-out;
 }
 
-.btn-2 {
-  font-size: 20px;
-  font-weight: 750;
-  margin-top: 1rem;
-  margin-left: 10%;
-  box-shadow: 0 6px 6px rgba(103, 138, 100, 0.2);
-  color: black;
+.btn:hover {
+  transform: translateY(-3px);
 }
 
-.btn a,
-.btn-2 a {
+.btn a {
   text-decoration: none;
 }
 
-.btn a:visited,
-.btn-2 a:visited {
-  color: black;
-}
-
-/*Media for buttons*/
-@media screen and (max-width: 720px) {
-  .btn,
-  .btn-2 {
-    margin-left: 25%;
-  }
+.btn a:visited {
+  color: white;
 }
 
 h1,

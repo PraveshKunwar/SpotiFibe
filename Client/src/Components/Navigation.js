@@ -6,7 +6,7 @@ import { Navbar, Nav, NavItem } from "react-bootstrap";
 import NavBrand from "../Styles/NavBrand";
 import NavList from "../Styles/NavList";
 
-class MainNav extends React.Component {
+class Navigation extends React.Component {
   render() {
     return (
       <Router>
@@ -46,4 +46,4 @@ class MainNav extends React.Component {
   }
 }
 
-export default MainNav;
+export default Navigation;
