@@ -2,6 +2,8 @@
   "name": "spotifibe",
   "version": "0.1.0",
   "private": true,
+  "host": "0.0.0.0",
+"proxy": "http://localhost:5000/", 
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@testing-library/jest-dom": "^5.11.5",
@@ -32,7 +34,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://localhost:5000/",
   "eslintConfig": {
     "extends": [
       "react-app",

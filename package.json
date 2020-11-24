@@ -5,7 +5,9 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon main.js"
+    "server": "nodemon main.js",
+    "client": "npm start --prefix Client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [
     "SpotiFibe"

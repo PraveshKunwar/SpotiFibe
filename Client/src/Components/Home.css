@@ -25,7 +25,6 @@ html {
   font-size: 20px;
   font-weight: 750;
   margin-top: 1rem;
-  box-shadow: 0 6px 6px #106112;
   color: white;
   transition: transform 0.3s ease-in-out;
 }

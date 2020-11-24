@@ -24,3 +24,19 @@
   color: white;
   font-family: "Sequel Sans", "Gotham Medium";
 }
+
+.youtube-btn {
+  box-shadow: none;
+  border-radius: 99px;
+  padding: 20px;
+  font-family: "Gotham Medium";
+  border-width: none;
+  margin-top: 1rem;
+  font-weight: 750;
+}
+
+.button-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

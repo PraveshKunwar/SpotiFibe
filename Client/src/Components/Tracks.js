@@ -2,6 +2,9 @@ import React from "react";
 import fetch from "node-fetch";
 import { Animated } from "react-animated-css";
 import style from "./Tracks.css";
+import { Button } from "react-bootstrap";
+
+import axios from "axios";
 
 class Tracks extends React.Component {
   constructor(props) {
@@ -13,6 +16,7 @@ class Tracks extends React.Component {
       id: "",
       tracks: [],
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -32,11 +36,42 @@ class Tracks extends React.Component {
       });
   }
 
+  handleClick() {
+    fetch("https://localhost:5000/data", {
+      method: "POST",
+      body: JSON.stringify({
+        tracks: this.state.tracks,
+        items: this.state.items,
+        value: this.state.value,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+  }
+
   render() {
     return (
       <div className="tracks" style={style}>
         <Animated isVisible={true} animationInDelay="1000" animationIn="fadeIn">
           <h1>{this.state.value}</h1>
+          <div className="button-div">
+            <Button
+              onClick={this.handleClick}
+              className="youtube-btn"
+              variant="danger"
+            >
+              <a
+                href="https://www.google.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Log in with YouTube
+              </a>
+            </Button>
+          </div>
         </Animated>
         <div className="tracks-images" style={style}>
           {this.state.tracks.map((track, id) => {
