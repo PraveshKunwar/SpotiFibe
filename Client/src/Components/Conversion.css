@@ -37,7 +37,6 @@ hr {
 }
 
 .playlists > div > img {
-  border-radius: 20px;
   height: 300px;
   transition: transform 0.3s ease-in-out;
 }

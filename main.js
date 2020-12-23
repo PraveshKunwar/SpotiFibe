@@ -20,6 +20,13 @@ const scopes =
   "ugc-image-upload user-read-recently-played user-top-read user-read-playback-position user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-currently-playing streaming playlist-modify-publicplaylist-modify-private playlist-read-private playlist-read-collaborative user-follow-modify user-follow-read user-library-modify user-library-read user-read-email user-read-private";
 
 app.use(cors({ origin: true, credentials: true }));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -32,6 +39,8 @@ app.use(function (req, res, next) {
   );
   next();
 });
+const urlencodedParser = bodyParser.urlencoded({ extended: true });
+app.use(urlencodedParser);
 app.use(bodyParser.json());
 app.use(express.json());
 
@@ -57,11 +66,10 @@ app.get("/callback", (req, res) => {
   });
 });
 
-app.post("/data", (req, res) => {
-  res.send(req.body.data.config.url);
-});
-app.listen(PORT, console.log(`Listening to ${PORT}`));
+//API endpoints
 
-app.get("/data", (req, res) => {
-  console.log(req.body.data.config.url);
+app.post("/api/tracks", (req, res) => {
+  console.log(req.body);
 });
+
+app.listen(PORT, console.log(`Listening to ${PORT}`));

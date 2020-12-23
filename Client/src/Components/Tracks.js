@@ -1,10 +1,8 @@
 import React from "react";
-import fetch from "node-fetch";
+import axios from "axios";
 import { Animated } from "react-animated-css";
 import style from "./Tracks.css";
 import { Button } from "react-bootstrap";
-
-import axios from "axios";
 
 class Tracks extends React.Component {
   constructor(props) {
@@ -15,11 +13,15 @@ class Tracks extends React.Component {
       token: this.props.token,
       id: "",
       tracks: [],
+      trackName: [],
+      text: "Submit tracks here!",
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleAuth = this.handleAuth.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
+    console.log(this.state.items);
     const filterArr = this.state.items.filter(
       (item) => item.name === this.state.value
     );
@@ -31,25 +33,23 @@ class Tracks extends React.Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log(data.items);
         this.setState({ tracks: data.items });
+        this.state.tracks.map((track) => {
+          console.log(track);
+        });
       });
   }
 
-  handleClick() {
-    fetch("https://localhost:5000/data", {
-      method: "POST",
-      body: JSON.stringify({
-        tracks: this.state.tracks,
-        items: this.state.items,
-        value: this.state.value,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => console.log(json));
+  handleAuth() {}
+  handleSubmit() {
+    axios
+      .post("/api/tracks", {
+        trackNames: this.state.trackName,
+      })
+      .then((res) => console.log(res))
+      .then(this.setState({ text: "Completion! ✔" }))
+      .catch((err) => console.error(err));
   }
 
   render() {
@@ -70,6 +70,14 @@ class Tracks extends React.Component {
               >
                 Log in with YouTube
               </a>
+            </Button>
+            <br></br>
+            <Button
+              onClick={this.handleSubmit}
+              className="youtube-btn submit"
+              variant="success"
+            >
+              {this.state.text}
             </Button>
           </div>
         </Animated>
