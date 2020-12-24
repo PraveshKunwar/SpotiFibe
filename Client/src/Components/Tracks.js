@@ -26,6 +26,7 @@ class Tracks extends React.Component {
       (item) => item.name === this.state.value
     );
     const getId = filterArr[0].id;
+    console.log(filterArr);
     fetch(`https://api.spotify.com/v1/playlists/${getId}/tracks`, {
       headers: {
         Authorization: "Bearer " + this.state.token,
@@ -35,17 +36,15 @@ class Tracks extends React.Component {
       .then((data) => {
         console.log(data.items);
         this.setState({ tracks: data.items });
-        this.state.tracks.map((track) => {
-          console.log(track);
-        });
       });
   }
-
   handleAuth() {}
   handleSubmit() {
-    axios
+    return axios
       .post("/api/tracks", {
-        trackNames: this.state.trackName,
+        trackNames: this.state.tracks.map((track) => {
+          return track.track !== null ? track.track.name : false;
+        }),
       })
       .then((res) => console.log(res))
       .then(this.setState({ text: "Completion! ✔" }))
