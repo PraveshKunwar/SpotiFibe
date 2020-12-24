@@ -6,6 +6,8 @@ const app = express();
 const PORT = 5000;
 const cors = require("cors");
 const request = require("request");
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const redirect_uri =
   process.env.redirect_uri || `http://localhost:${PORT}/callback`;
 app.use(cors({ origin: true, credentials: true }));
@@ -70,11 +72,13 @@ const clientSchema = require("./db/clientSchema");
 const secrets = {
   clientID: process.env.YOUTUBE_CLIENT_ID,
   clientSecret: process.env.YOUTUBE_CLIENT_SECRET,
-  callbackURL: `https://localhost:${PORT}/auth/google`,
+  callbackURL: `https://localhost:${PORT}/auth/google/callback`,
 };
 
-const db = mongoose.connect();
-const User = db.model("User", clientSchema);
+const db = mongoose
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
+  .catch((err) => console.log(err));
+const User = mongoose.model("User", clientSchema);
 
 //passport auth using google strategy
 passport.serializeUser((user, done) => {
@@ -92,7 +96,7 @@ passport.use(
     {
       clientID: secrets.clientID,
       clientSecret: secrets.clientSecret,
-      callbackUrl: secrets.callbackURL,
+      callbackURL: secrets.callbackURL,
     },
     function (accessToken, refreshToken, profile, done) {
       process.nextTick(() => {
@@ -128,8 +132,7 @@ app.use(passport.session());
 app.get(
   "/auth/google",
   passport.authenticate("google", {
-    scope: ["profile", "https://www.googleapis.com/auth/youtube"],
-    accessType: "offline",
+    scope: ["https://www.googleapis.com/auth/youtube"],
   })
 );
 

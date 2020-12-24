@@ -56,7 +56,7 @@ class Tracks extends React.Component {
         <Animated isVisible={true} animationInDelay="1000" animationIn="fadeIn">
           <h1>{this.state.value}</h1>
           <div className="button-div">
-            <Link to="https://localhost:5000/auth/youtube">
+            <a href="http://localhost:5000/auth/google">
               <Button
                 onClick={this.handleClick}
                 className="youtube-btn"
@@ -64,7 +64,7 @@ class Tracks extends React.Component {
               >
                 Log in with YouTube
               </Button>
-            </Link>
+            </a>
             <br></br>
             <Button
               onClick={this.handleSubmit}
