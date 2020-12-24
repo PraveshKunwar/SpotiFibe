@@ -1,62 +1,24 @@
-// The client ID is obtained from the {{ Google Cloud Console }}
-// at {{ https://cloud.google.com/console }}.
-// If you run this code from a server other than http://localhost,
-// you need to register your own client ID.
-var OAUTH2_CLIENT_ID =
-  "977856048509-0v6jmfbq7rmvkuegpvpee9h279ncajpf.apps.googleusercontent.com";
-var OAUTH2_SCOPES = ["https://www.googleapis.com/auth/youtube"];
+require("dotenv").config();
+const { google } = require("googleapis");
+const scopes = "https://www.googleapis.com/auth/youtube";
 
-// Upon loading, the Google APIs JS client automatically invokes this callback.
-googleApiClientReady = function () {
-  gapi.auth.init(function () {
-    window.setTimeout(checkAuth, 1);
-  });
-};
+const oauth2Client = new google.auth.OAuth2(
+  process.env.YOUTUBE_CLIENT_ID,
+  process.env.YOUTUBE_CLIENT_SECRET,
+  process.env.YOUTUBE_REDIRECT
+);
 
-// Attempt the immediate OAuth 2.0 client flow as soon as the page loads.
-// If the currently logged-in Google Account has previously authorized
-// the client specified as the OAUTH2_CLIENT_ID, then the authorization
-// succeeds with no user intervention. Otherwise, it fails and the
-// user interface that prompts for authorization needs to display.
-function checkAuth() {
-  gapi.auth.authorize(
-    {
-      client_id: OAUTH2_CLIENT_ID,
-      scope: OAUTH2_SCOPES,
-      immediate: true,
-    },
-    handleAuthResult
-  );
-}
+const url = oauth2Client.generateAuthUrl({
+  access_type: "offline",
+  scope: scopes,
+});
 
-// Handle the result of a gapi.auth.authorize() call.
-function handleAuthResult(authResult) {
-  if (authResult && !authResult.error) {
-    // Authorization was successful. Hide authorization prompts and show
-    // content that should be visible after authorization succeeds.
-    res.redirect("https://localhost:5000");
-    loadAPIClientInterfaces();
-  } else {
-    // Make the #login-link clickable. Attempt a non-immediate OAuth 2.0
-    // client flow. The current function is called when that flow completes.
-    $("#login-link").click(function () {
-      gapi.auth.authorize(
-        {
-          client_id: OAUTH2_CLIENT_ID,
-          scope: OAUTH2_SCOPES,
-          immediate: false,
-        },
-        handleAuthResult
-      );
-    });
+const { tokens } = oauth2Client.getToken(code);
+oauth2Client.setCredentials(tokens);
+
+oauth2Client.on("tokens", (tokens) => {
+  if (tokens.refresh_token) {
+    console.log(tokens.refresh_token);
   }
-}
-
-// Load the client interfaces for the YouTube Analytics and Data APIs, which
-// are required to use the Google APIs JS client. More info is available at
-// https://developers.google.com/api-client-library/javascript/dev/dev_jscript#loading-the-client-library-and-the-api
-function loadAPIClientInterfaces() {
-  gapi.client.load("youtube", "v3", function () {
-    handleAPILoaded();
-  });
-}
+  console.log(`Access token!  - ${tokens.access_token}`);
+});

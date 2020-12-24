@@ -5,6 +5,7 @@ import About from "./About";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import NavBrand from "../Styles/NavBrand";
 import NavList from "../Styles/NavList";
+import Processing from "./Processing";
 
 class Navigation extends React.Component {
   render() {
@@ -39,6 +40,7 @@ class Navigation extends React.Component {
             <Route exact path="/" component={Home} />
             <Route path="/home" component={Home} />
             <Route path="/about" component={About} />
+            <Route path="/process" component={Processing} />
           </Switch>
         </div>
       </Router>

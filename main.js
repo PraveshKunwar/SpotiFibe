@@ -2,22 +2,12 @@ require("dotenv").config();
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const path = require("path");
 const app = express();
 const PORT = 5000;
 const cors = require("cors");
-let querystring = require("querystring");
 const request = require("request");
-const { post } = require("request");
 const redirect_uri =
   process.env.redirect_uri || `http://localhost:${PORT}/callback`;
-const axios = require("axios");
-const fetch = require("node-fetch");
-
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const scopes =
-  "ugc-image-upload user-read-recently-played user-top-read user-read-playback-position user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-currently-playing streaming playlist-modify-publicplaylist-modify-private playlist-read-private playlist-read-collaborative user-follow-modify user-follow-read user-library-modify user-library-read user-read-email user-read-private";
 app.use(cors({ origin: true, credentials: true }));
 app.use(
   cors({
@@ -66,6 +56,133 @@ app.get("/callback", (req, res) => {
 });
 
 //API endpoints
+
+//google authentication and playlist conversion process
+
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+const mongoose = require("mongoose");
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
+const session = require("express-session");
+const clientSchema = require("./db/clientSchema");
+
+const secrets = {
+  clientID: process.env.YOUTUBE_CLIENT_ID,
+  clientSecret: process.env.YOUTUBE_CLIENT_SECRET,
+  callbackURL: `https://localhost:${PORT}/auth/google`,
+};
+
+const db = mongoose.connect();
+const User = db.model("User", clientSchema);
+
+//passport auth using google strategy
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: secrets.clientID,
+      clientSecret: secrets.clientSecret,
+      callbackUrl: secrets.callbackURL,
+    },
+    function (accessToken, refreshToken, profile, done) {
+      process.nextTick(() => {
+        User.findOne({ _id: profile.id }, (err, res) => {
+          err ? done(err) : false;
+          if (res) {
+            console.log("User is available.");
+            return done(null, res);
+          } else {
+            console.log("New user");
+            const user = new User({
+              _id: profile.id,
+              access_token: accessToken,
+              refresh_token: refreshToken,
+              name: profile.displayName,
+            });
+          }
+        });
+      });
+    }
+  )
+);
+
+const userLogged = (req, res, next) => {
+  if (req.isAuthenticated()) return next();
+  res.redirect("/auth/google");
+};
+
+app.use(session({ secret: "secret" }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "https://www.googleapis.com/auth/youtube"],
+    accessType: "offline",
+  })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/profile",
+    failureRedirect: "/",
+  })
+);
+
+app.get("/profile", userLogged, (req, res) => {
+  console.log(req.user);
+  const oauth2Client = new OAuth2(
+    secrets.clientID,
+    secrets.clientSecret,
+    secrets.callbackURL
+  );
+  oauth2Client.credentials = {
+    access_token: req.user.access_token,
+    refresh_token: req.user.refresh_token,
+  };
+  google
+    .youtube({
+      version: "v3",
+      auth: oauth2Client,
+    })
+    .subscriptions.list(
+      {
+        part: "snippet",
+        mine: true,
+        headers: {},
+      },
+      function (err, data, response) {
+        if (err) {
+          console.error("Error: " + err);
+          res.json({
+            status: "error",
+          });
+        }
+        if (data) {
+          console.log(data);
+          res.json({
+            status: "ok",
+            data: data,
+          });
+        }
+        if (response) {
+          console.log("Status code: " + response.statusCode);
+        }
+      }
+    );
+});
 
 app.post("/api/tracks", (req, res) => {
   console.log(req.body);

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Animated } from "react-animated-css";
 import style from "./Tracks.css";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class Tracks extends React.Component {
   constructor(props) {
@@ -16,7 +17,6 @@ class Tracks extends React.Component {
       trackName: [],
       text: "Submit tracks here!",
     };
-    this.handleAuth = this.handleAuth.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -38,7 +38,6 @@ class Tracks extends React.Component {
         this.setState({ tracks: data.items });
       });
   }
-  handleAuth() {}
   handleSubmit() {
     return axios
       .post("/api/tracks", {
@@ -57,19 +56,15 @@ class Tracks extends React.Component {
         <Animated isVisible={true} animationInDelay="1000" animationIn="fadeIn">
           <h1>{this.state.value}</h1>
           <div className="button-div">
-            <Button
-              onClick={this.handleClick}
-              className="youtube-btn"
-              variant="danger"
-            >
-              <a
-                href="https://www.google.com/"
-                target="_blank"
-                rel="noreferrer"
+            <Link to="https://localhost:5000/auth/youtube">
+              <Button
+                onClick={this.handleClick}
+                className="youtube-btn"
+                variant="danger"
               >
                 Log in with YouTube
-              </a>
-            </Button>
+              </Button>
+            </Link>
             <br></br>
             <Button
               onClick={this.handleSubmit}
