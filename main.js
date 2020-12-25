@@ -72,11 +72,14 @@ const clientSchema = require("./db/clientSchema");
 const secrets = {
   clientID: process.env.YOUTUBE_CLIENT_ID,
   clientSecret: process.env.YOUTUBE_CLIENT_SECRET,
-  callbackURL: `https://localhost:${PORT}/auth/google/callback`,
+  callbackURL: `https://localhost:5000/auth/google/callback`,
 };
 
 const db = mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .catch((err) => console.log(err));
 const User = mongoose.model("User", clientSchema);
 
@@ -122,7 +125,7 @@ passport.use(
 
 const userLogged = (req, res, next) => {
   if (req.isAuthenticated()) return next();
-  res.redirect("/auth/google");
+  res.redirect("http://localhost:3000/#");
 };
 
 app.use(session({ secret: "secret" }));
@@ -132,35 +135,41 @@ app.use(passport.session());
 app.get(
   "/auth/google",
   passport.authenticate("google", {
-    scope: ["https://www.googleapis.com/auth/youtube"],
+    scope: ["profile", "https://www.googleapis.com/auth/youtube"],
   })
 );
 
-app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    successRedirect: "/profile",
-    failureRedirect: "/",
-  })
-);
-
-app.get("/profile", userLogged, (req, res) => {
+app.get("/auth/google/callback", (req, res) => {
   console.log(req.user);
   const oauth2Client = new OAuth2(
     secrets.clientID,
     secrets.clientSecret,
     secrets.callbackURL
   );
-  oauth2Client.credentials = {
-    access_token: req.user.access_token,
-    refresh_token: req.user.refresh_token,
-  };
-  google
-    .youtube({
-      version: "v3",
-      auth: oauth2Client,
-    })
-    .subscriptions.list(
+
+  const session = req.session;
+  const code = req.query.code;
+  oauth2Client.getToken(code, (err, tokens) => {
+    console.log(`Tokens: ${tokens}`);
+    if (!err) {
+      oauth2Client.setCredentials(tokens);
+      console.log(`Tokens: ${tokens}`);
+      session["tokens"] = tokens;
+      res.redirect("/profile");
+    }
+  });
+});
+
+app.get("/profile", userLogged, (req, res) => {
+  const oauth2Client = new OAuth2(
+    secrets.clientID,
+    secrets.clientSecret,
+    secrets.callbackURL
+  );
+  oauth2Client.setCredentials(req.session["tokens"]);
+  google.youtube({
+    version: "v3",
+    auth: oauth2Client.subscriptions.list(
       {
         part: "snippet",
         mine: true,
@@ -184,7 +193,9 @@ app.get("/profile", userLogged, (req, res) => {
           console.log("Status code: " + response.statusCode);
         }
       }
-    );
+    ),
+  });
+  res.redirect("http://localhost:3000/process");
 });
 
 app.post("/api/tracks", (req, res) => {
